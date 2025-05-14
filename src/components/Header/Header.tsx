@@ -1,8 +1,7 @@
 import { useState, useRef, useEffect } from "react";
 import "./styles.scss";
 import { Link } from "react-router-dom";
-import logo from '../../assets/logo.png'; 
-import shareLink from '../../assets/link.svg'; 
+import { Logo, shareLink } from "../../constants/constant";
 
 const Header = () => {
     const [isOpen, setMenuState] = useState(false);
@@ -48,7 +47,7 @@ const Header = () => {
         <div className='main-header'>
             <div className='logo-section'>
                 <Link to="/">
-                    <img src={logo} alt="Sidepanda" className='logo' />
+                    <img src={Logo} alt="Sidepanda" className='logo' />
                 </Link>
             </div>
 

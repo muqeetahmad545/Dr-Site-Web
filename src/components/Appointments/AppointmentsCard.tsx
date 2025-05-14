@@ -15,11 +15,11 @@ import {
 } from "antd";
 import DrSmithImg from "../../assets/driamge.jpg";
 import "./styles.scss";
-import { PrimaryButton } from "../../components/PrimaryButton";
+import { PrimaryButton } from "../PrimaryButton";
 
 const { Title, Paragraph } = Typography;
 
-const Appointments = () => {
+const AppointmentsCard = () => {
   const [appointments, setAppointments] = useState([
     { id: 1, doctor: "Dr. Smith", date: "2025-05-10", time: "10:00 AM" },
     { id: 2, doctor: "Dr. Johnson", date: "2025-05-15", time: "02:30 PM" },
@@ -233,4 +233,4 @@ const Appointments = () => {
   );
 };
 
-export default Appointments;
+export default AppointmentsCard;

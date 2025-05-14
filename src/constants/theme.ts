@@ -5,7 +5,7 @@ export const COLORS = {
     white: '#ffffff',
     danger: '#ff4d4f',
 
-    secondary: '#4a90e2',        
+    // secondary: '#4a90e2',        
     accent: '#f5a623',           
     success: '#45b36b',         
     textPrimary: '#1a1a1a',      
