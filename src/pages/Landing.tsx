@@ -1,17 +1,17 @@
-"use client";
-import Header from "../components/Header/Header";
-import Landing from "../components/Landing/Landing";
-import ServicesLanding from "../components/Services/ServiceLanding";
-import Categories from "../components/Landing/Catogries";
-import Integrate from "../components/Landing/Integrate";
-import ContactUs from "../components/Landing/ContactUs";
-import ClientReviews from "../components/Landing/Reviews";
-import AOS from "aos";
-import "aos/dist/aos.css";
-import { useEffect } from "react";
-import { Gallery } from "../components/Landing/Gallery";
-import Clients from "../components/Services/Clients";
-import BrandCarousal from "../components/Landing/BrandCarousal";
+'use client';
+import Header from '../components/Header/Header';
+import Landing from '../components/Landing/Landing';
+import ServicesLanding from '../components/Services/ServiceLanding';
+import Categories from '../components/Landing/Catogries';
+import Integrate from '../components/Landing/Integrate';
+import ContactUs from '../components/Landing/ContactUs';
+import ClientReviews from '../components/Landing/Reviews';
+import AOS from 'aos';
+import 'aos/dist/aos.css';
+import { useEffect } from 'react';
+import { Gallery } from '../components/Landing/Gallery';
+import Clients from '../components/Services/Clients';
+import BrandCarousal from '../components/Landing/BrandCarousal';
 
 export default function Home() {
   useEffect(() => {
@@ -25,12 +25,12 @@ export default function Home() {
     <div>
       <Header />
       <Landing />
-      <BrandCarousal/>
+      <BrandCarousal />
       <Integrate />
-      <Clients/>
+      <Clients />
       <Categories />
       <ServicesLanding />
-      <Gallery/>
+      <Gallery />
       <ContactUs />
       <ClientReviews />
     </div>
