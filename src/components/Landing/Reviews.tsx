@@ -13,7 +13,7 @@ const ClientReviews = () => {
         },
         {
             title: "It was a very Excellent experience...",
-            comment: "I just love working hard. A lot of times I find that people who are blessed with the most talent don't ever develop that attitude, and the ones who aren't blessed in that way are the most competitive and have the biggest heart.",
+            comment: "I just love working hard. I love being part of a team; I love working toward a common goal. A lot of times I find that people who are blessed with the most talent don't ever develop that attitude, and the ones who aren't blessed in that way are the most competitive and have the biggest heart.",
             name: "Jane",
             image: 'https://res.cloudinary.com/dfizbmrep/image/upload/v1710497214/client5_r1pmzz.png', // Replace with actual image path
         },

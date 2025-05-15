@@ -1,5 +1,6 @@
 
 import { ClockCircleOutlined } from '@ant-design/icons';
+import { COLORS } from '../../constants/theme';
 
 
 const Landing = () => {
@@ -8,8 +9,9 @@ const Landing = () => {
     <div
       className="pt-[120px] h-screen flex justify-center items-center bg-cover bg-no-repeat bg-center w-full relative overflow-hidden"
       style={{
-        backgroundImage:
-          "url('https://res.cloudinary.com/dfizbmrep/image/upload/v1710497209/background_vgycqk.png')",
+        background:COLORS.gradientPrimary
+        // backgroundImage:
+        //   "url('https://res.cloudinary.com/dfizbmrep/image/upload/v1710497209/background_vgycqk.png')",
       }}
     >
       <div className="innerContainer z-10">
@@ -18,7 +20,7 @@ const Landing = () => {
             <div className="flex items-center flex-col">
               <h1
                 data-aos="fade-right"
-                className="text-[50px] font-extrabold leading-[70px] max-sm:text-5xl max-lg:text-4xl"
+                className="text-[40px] font-extrabold leading-[70px] max-sm:text-5xl max-lg:text-4xl"
               >
                 Extraordinary Care is Right Here
               </h1>

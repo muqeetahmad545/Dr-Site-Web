@@ -29,30 +29,7 @@ const Categories = () => {
             additionalImagePath: "https://res.cloudinary.com/dfizbmrep/image/upload/v1710497207/bellicon_qeppwi.png",
             bgColor: "#FFE7FB",
         },
-        {
-            title: "Web Development",
-            description: "Feasible, affordable and shortened time-to-market features, these solutions help your ideas excel better.",
-            imagePath: "https://res.cloudinary.com/dfizbmrep/image/upload/v1710497226/screen_sltnzi.png",
-            bgColor: "#FFE7FB",
-        },
-        {
-            title: "UI/UX Design",
-            description: "Feasible, affordable and shortened time-to-market features, these solutions help your ideas excel better.",
-            imagePath: "https://res.cloudinary.com/dfizbmrep/image/upload/v1710497241/webpage_xqcojq.png",
-            bgColor: "#E2F3FF",
-        },
-        {
-            title: "Blockchain / Crypto",
-            description: "Feasible, affordable and shortened time-to-market features, these solutions help your ideas excel better.",
-            imagePath: "https://res.cloudinary.com/dfizbmrep/image/upload/v1710497209/blockchain_i7ah54.png",
-            bgColor: "#FFF2F2",
-        },
-        {
-            title: "Digital Marketing & E-Commerce ",
-            description: "Feasible, affordable and shortened time-to-market features, these solutions help your ideas excel better.",
-            imagePath: "https://res.cloudinary.com/dfizbmrep/image/upload/v1710497218/heartphone_wyfnn8.png",
-            bgColor: "#F1E8FF",
-        },
+       
     ];
 
     return (

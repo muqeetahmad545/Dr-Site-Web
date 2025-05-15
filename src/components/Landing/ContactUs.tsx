@@ -1,7 +1,8 @@
+import { COLORS } from "../../constants/theme"
 
 const ContactUs = () => {
     return (
-        <div className='w-full flex justify-center bg-secondary relative overflow-hidden'>
+        <div style={{background:COLORS.gradientPrimary}} className='w-full flex justify-center relative overflow-hidden'>
             <div className="innerContainer py-14 p-10">
                 <div className='text-white flex flex-col items-center gap-6'>
                     <h1 className='text-5xl font-bold max-sm:text-3xl text-center'>Contact us for a quotes</h1>
