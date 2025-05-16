@@ -11,6 +11,7 @@ import "aos/dist/aos.css";
 import { useEffect } from "react";
 import { Gallery } from "../components/Landing/Gallery";
 import Clients from "../components/Services/Clients";
+import BrandCarousal from "../components/Landing/BrandCarousal";
 
 export default function Home() {
   useEffect(() => {
@@ -24,6 +25,7 @@ export default function Home() {
     <div>
       <Header />
       <Landing />
+      <BrandCarousal/>
       <Integrate />
       <Clients/>
       <Categories />

@@ -1,3 +1,4 @@
+import { COLORS } from "../../constants/theme";
 
 const Card = () => {
     const data = [
@@ -54,30 +55,87 @@ const Card = () => {
                             <Image src='/playIcon.png' alt='icon' width={108} height={108} className='absolute ' />
                         </div>
                     </div> */}
-                    <div className='w-full flex max-lg:flex-col justify-center gap-8 py-40 mb-40 relative max-lg:px-10'>
-                        <div data-aos="fade-right" className='p-10 px-16 rounded-xl bg-[#F4F4F4] w-[32%] max-xl:w-full z-10 max-sm:p-8'>
-                            <h2 className='text-center font-semibold text-2xl pt-6 max-sm:text-xl'>Empowering Businesses with Innovative Software Solutions</h2>
-                            <p className='py-10 max-sm:text-sm'>
-                                Welcome to AccellionX, your partner for cutting-edge software solutions tailored to modern business needs. Our experienced team leverages the latest technologies to drive efficiency, productivity, and growth. From web and mobile app development to enterprise software solutions, we transform ideas into reality. Partner with us to stay ahead in today's competitive market.</p>
-                            <button className='p-2 px-6 max-sm:text-sm bg-secondary text-white rounded-xl'>View More</button>
-                        </div>
-                        <div data-aos="fade-left" className='relative w-[32%] max-xl:w-full'>
-                            <div className='p-10 px-16 bg-secondary rounded-xl text-white relative z-10 overflow-hidden max-sm:p-8'>
-                                <div className='z-30'>
-                                    <h2 className='text-center font-semibold text-2xl max-sm:text-xl pt-6'>Transforming Ideas into Digital Success Stories</h2>
-                                    <p className='py-10 max-sm:text-sm'>
-                                        At AccellionX, we drive digital success through innovation and collaboration. With user-centric design and scalable architectures, we exceed client expectations. Our services include software development, cloud solutions, and digital transformation consulting. Whether streamlining operations or launching a new product, we propel businesses forward. Partner with us and embark on a journey towards digital success.</p>
-                                    <button className='p-2 px-6 bg-white max-sm:text-sm text-secondary rounded-xl'>View More</button>
-                                </div>
-                                <img src='https://res.cloudinary.com/dfizbmrep/image/upload/v1710497228/strings_p9o6yi.png' alt='icon' width={708} height={700} className='absolute -top-64 -right-20 z-20' />
-                            </div>
-                            <img src='https://res.cloudinary.com/dfizbmrep/image/upload/v1710497207/bellicon_qeppwi.png' alt='icon' width={120} height={120} className='absolute -top-16 right-0 z-20' />
-                        </div>
-                        <img src='https://res.cloudinary.com/dfizbmrep/image/upload/v1710497203/bubble_zopyks.png' alt='icon' width={450} height={450} className='absolute -bottom-0 right-20 z-0' />
-                        <img src='https://res.cloudinary.com/dfizbmrep/image/upload/v1710497217/fadebubble_ffvbno.png' alt='icon' width={450} height={450} className='absolute max-sm:w-60 -top-14 left-10 z-0' />
-                        <img src='https://res.cloudinary.com/dfizbmrep/image/upload/v1710497207/arrowsup_op6cpm.png' alt='icon' width={38} height={70} className='absolute -top-0 left-0 z-0' />
-                        <img src='https://res.cloudinary.com/dfizbmrep/image/upload/v1710497207/arrowsup_op6cpm.png' alt='icon' width={38} height={70} className='absolute -bottom-14 right-0 z-0 rotate-180' />
-                    </div>
+                    <div className="w-full flex max-lg:flex-col justify-center gap-8 py-40 mb-40 relative max-lg:px-10">
+                             <div
+                               data-aos="fade-right"
+                               className="p-10 px-16 rounded-xl bg-[#F4F4F4] w-[32%] max-xl:w-full z-10 max-sm:p-8"
+                             >
+                               <h2 className="text-center font-semibold text-2xl pt-6 max-sm:text-xl">
+                                 Changing And Growing With You
+                               </h2>
+                               <p className="py-10 max-sm:text-sm">
+                                 Ut wisi enim ad minim veniam, quis laore nostrud exerci tation
+                                 ulm hedi corper turet suscipit lobortis nisl ut aliquip erat
+                                 volutpat diam nonummy nibh euismod tincidunt ut laoreet dolore.
+                               </p>{" "}
+                               <button className="p-2 px-6 max-sm:text-sm bg-secondary text-white rounded-xl">
+                                 View More
+                               </button>
+                             </div>
+                             <div
+                               data-aos="fade-left"
+                               className="relative w-[32%] max-xl:w-full"
+                             >
+                               <div style={{background:COLORS.gradientPrimary}} className="p-10 px-16 rounded-xl text-white relative z-10 overflow-hidden max-sm:p-8">
+                                 <div className="z-30">
+                                   <h2 className="text-center font-semibold text-2xl max-sm:text-xl pt-6">
+                                     Because Your Life Matters
+                                   </h2>
+                                   <p className="py-10 max-sm:text-sm">
+                                     Ut wisi enim ad minim veniam, quis laore nostrud exerci
+                                     tation ulm hedi corper turet suscipit lobortis nisl ut
+                                     aliquip erat volutpat diam nonummy nibh euismod tincidunt ut
+                                     laoreet dolore.{" "}
+                                   </p>
+                                   <button className="p-2 px-6 bg-white max-sm:text-sm text-secondary rounded-xl">
+                                     View More
+                                   </button>
+                                 </div>
+                                 <img
+                                   src="https://res.cloudinary.com/dfizbmrep/image/upload/v1710497228/strings_p9o6yi.png"
+                                   alt="icon"
+                                   width={708}
+                                   height={700}
+                                   className="absolute -top-64 -right-20 z-20"
+                                 />
+                               </div>
+                               <img
+                                 src="https://res.cloudinary.com/dfizbmrep/image/upload/v1710497207/bellicon_qeppwi.png"
+                                 alt="icon"
+                                 width={120}
+                                 height={120}
+                                 className="absolute -top-16 right-0 z-20"
+                               />
+                             </div>
+                             <img
+                               src="https://res.cloudinary.com/dfizbmrep/image/upload/v1710497203/bubble_zopyks.png"
+                               alt="icon"
+                               width={450}
+                               height={450}
+                               className="absolute -bottom-0 right-20 z-0"
+                             />
+                             <img
+                               src="https://res.cloudinary.com/dfizbmrep/image/upload/v1710497217/fadebubble_ffvbno.png"
+                               alt="icon"
+                               width={450}
+                               height={450}
+                               className="absolute max-sm:w-60 -top-14 left-10 z-0"
+                             />
+                             <img
+                               src="https://res.cloudinary.com/dfizbmrep/image/upload/v1710497207/arrowsup_op6cpm.png"
+                               alt="icon"
+                               width={38}
+                               height={70}
+                               className="absolute -top-0 left-0 z-0"
+                             />
+                             <img
+                               src="https://res.cloudinary.com/dfizbmrep/image/upload/v1710497207/arrowsup_op6cpm.png"
+                               alt="icon"
+                               width={38}
+                               height={70}
+                               className="absolute -bottom-14 right-0 z-0 rotate-180"
+                             />
+                           </div>
                 </div>
             </div>
         </div>

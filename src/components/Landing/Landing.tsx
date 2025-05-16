@@ -1,15 +1,15 @@
-
-import { ClockCircleOutlined } from '@ant-design/icons';
-import { COLORS } from '../../constants/theme';
-
+// import { ClockCircleOutlined } from "@ant-design/icons";
+import { COLORS } from "../../constants/theme";
+import { Link } from "react-router-dom";
+import {  shareLink } from "../../constants/constant";
 
 const Landing = () => {
-  const pdfUrl = "https://accellionx.com/portfolio.pdf";
+  // const pdfUrl = "https://accellionx.com/portfolio.pdf";
   return (
     <div
       className="pt-[120px] h-screen flex justify-center items-center bg-cover bg-no-repeat bg-center w-full relative overflow-hidden"
       style={{
-        background:COLORS.gradientPrimary
+        background: COLORS.gradientPrimary,
         // backgroundImage:
         //   "url('https://res.cloudinary.com/dfizbmrep/image/upload/v1710497209/background_vgycqk.png')",
       }}
@@ -22,7 +22,9 @@ const Landing = () => {
                 data-aos="fade-right"
                 className="text-[40px] font-extrabold leading-[70px] max-sm:text-5xl max-lg:text-4xl"
               >
-                Extraordinary Care is Right Here
+                       <div data-aos="fade-right" className="text-5xl flex gap-2 font-extrabold py-20 justify-center">
+                    <span className='text-white'>Extraordinary Care </span>  is Right Here
+                </div>
               </h1>
               <div
                 data-aos="fade-right"
@@ -35,16 +37,12 @@ const Landing = () => {
             >
               FIND ONE OF OUR DOCTORS{" "}
             </p>
-            <a
-              data-aos="fade-right"
-              href={pdfUrl}
-              download
-              target="_blank"
-              className="flex items-center p-5 text-2xl bg-secondary rounded-full px-10 w-max gap-2 text-white max-sm:text-xl max-sm:p-2 max-sm:px-6"
-            >
-              <span>ANAPPOINTMENT</span>
-              <ClockCircleOutlined className="text-4xl max-sm:text-2xl max-lg:text-xl" />
-            </a>
+            <Link to="https://www.sidepanda.com" target="_blank">
+              <button className="flex items-center text-xl rounded-full px-6 py-4 w-max gap-2 text-white border-2 border-white hover:bg-[#5aa778] hover:shadow-lg transition duration-300 ease-in-out">
+                <img src={shareLink} alt="Link" className="link-icon w-6 h-6" />
+                <span className="ml-2">Get Appointment</span>
+              </button>
+            </Link>
           </div>
           <div data-aos="fade-left" className="max-sm:hidden ">
             <img

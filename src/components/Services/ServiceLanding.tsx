@@ -5,10 +5,9 @@ const ServiceLanding = () => {
         <div className="flex justify-center bg-cover bg-no-repeat bg-center w-full relative">
             <div className='innerContainer z-30'>
                 <div className='flex flex-col items-center max-lg: max-sm:p-10'>
-                    <h2 data-aos="fade-down" className='mt-10 text-4xl max-lg:text-3xl max-sm:text-2xl max-lg: max-sm:text-center text-[#696969] py-20 max-lg: max-sm:pt-0'>
-                     Finest Patient Care & Amenities
-                    </h2>
-
+                     <div data-aos="fade-right" className="text-5xl flex gap-2 font-extrabold py-20 justify-center">
+                    <span className='text-[#5bac52]'>  Finest Patient Care  </span> Amenities
+                </div>
                     <div data-aos="fade-down" className='grid grid-cols-2 max-lg:grid-cols-1 max-sm:grid-cols-1 w-[90%] h-max relative mb-8' style={{ boxShadow: '0px 0px 35px #D2D2D2' }}>
                         <div className='grid grid-cols-10 gap-4 pt-16 max-lg:pt-5 max-sm:pt-5 pl-16 max-lg:pl-5 max-sm:pl-5 items-center p-5 border-b border-r border-[#D2D2D2]'>
                             <div className='p-4 rounded-2xl max-sm:hidden col-span-2 max-sm:col-span-1 bg-[#F1E8FF] flex items-center w-max justify-center whitespace-nowrap'>

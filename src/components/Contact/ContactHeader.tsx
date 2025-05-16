@@ -6,9 +6,12 @@ import ContactBox from './ContactBox';
 
 const ContactHeader = () => {
   return (
-    <div className="pt-[120px] max-sm:pt-20 flex justify-center bg-cover bg-no-repeat bg-center w-full relative" style={{ backgroundImage: "url('https://res.cloudinary.com/dfizbmrep/image/upload/v1710497220/contactbg_eko1ct.png')" }}>
+    <div className="pt-[0px] max-sm:pt-20 flex justify-center bg-cover bg-no-repeat bg-center w-full relative" style={{ 
+      backgroundImage: "url('https://res.cloudinary.com/dfizbmrep/image/upload/v1710497220/contactbg_eko1ct.png')"
+       }}>
       <div className='innerContainer z-30'>
-        <div className='py-16 mb-10 flex gap-10 justify-between items-center'>
+        <div 
+        className='py-16 mb-10 flex gap-10 justify-between items-center'>
           <div className='max-lg:px-10'>
             <img src='https://res.cloudinary.com/dfizbmrep/image/upload/v1710497220/ladyicon_v3xctf.png' alt='icon' width={77} height={53} className='py-5' />
             <div className='flex items-end flex-col'>

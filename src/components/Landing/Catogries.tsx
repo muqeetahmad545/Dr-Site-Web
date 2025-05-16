@@ -6,25 +6,25 @@ const Categories = () => {
     const categories = [
         {
             title: "Thomas Launge",
-            description: "Feasible, affordable and shortened time-to-market features, these solutions help your ideas excel better.",
+            description:"Ut wisi enim ad minim veniam, quis laore est usus legentis in iis qui facit eorum nostrud",
             imagePath: "https://res.cloudinary.com/dfizbmrep/image/upload/v1710497226/setting_rfmin6.png",
             bgColor: "#F1E8FF",
         },
         {
-            title: "Data Science",
-            description: "Feasible, affordable and shortened time-to-market features, these solutions help your ideas excel better.",
+            title: "Eye Medication",
+            description:"Ut wisi enim ad minim veniam, quis laore est usus legentis in iis qui facit eorum nostrud",
             imagePath: "https://res.cloudinary.com/dfizbmrep/image/upload/v1710497228/storage_bessrs.png",
             bgColor: "#FFF2F2",
         },
         {
-            title: "DevOps & CloudOps",
-            description: "Feasible, affordable and shortened time-to-market features, these solutions help your ideas excel better.",
+            title: "Blidness Test",
+            description:"Ut wisi enim ad minim veniam, quis laore est usus legentis in iis qui facit eorum nostrud",
             imagePath: "https://res.cloudinary.com/dfizbmrep/image/upload/v1710497220/infinity_cth8ej.png",
             bgColor: "#E2F3FF",
         },
         {
-            title: "Mobile Development",
-            description: "Feasible, affordable and shortened time-to-market features, these solutions help your ideas excel better.",
+            title: "Lasik Surgery",
+            description:"Ut wisi enim ad minim veniam, quis laore est usus legentis in iis qui facit eorum nostrud",
             imagePath: "https://res.cloudinary.com/dfizbmrep/image/upload/v1710497221/mobile_vk6nnr.png",
             additionalImagePath: "https://res.cloudinary.com/dfizbmrep/image/upload/v1710497207/bellicon_qeppwi.png",
             bgColor: "#FFE7FB",
