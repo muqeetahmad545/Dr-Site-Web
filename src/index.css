@@ -2,37 +2,57 @@
 @tailwind components;
 @tailwind utilities;
 
-*,body {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+*,
+body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 .innerContainer {
-    max-width: 1700px;
-    padding-right: 40px;
-    padding-left: 40px;
-    width: 100%;
+  max-width: 1700px;
+  padding-right: 40px;
+  padding-left: 40px;
+  width: 100%;
 }
 
 @media (max-width: 768px) {
-    .innerContainer {
-        padding-right: 0;
-        padding-left: 0;
-    }
+  .innerContainer {
+    padding-right: 0;
+    padding-left: 0;
+  }
 }
 
 .react-multi-carousel-dot--active button {
-    background: #2BBEA4 !important;
+  background: #2bbea4 !important;
 }
 
 .react-multiple-carousel__arrow--right {
-    background: #10C0CB !important;
-    padding: 10px;
-    padding-right: 40px;
-    padding-left: 40px;
-    border-radius: 8px !important;
+  background: #10c0cb !important;
+  padding: 10px;
+  padding-right: 40px;
+  padding-left: 40px;
+  border-radius: 8px !important;
 }
 .react-multiple-carousel__arrow--right {
-    right: 0px !important;
+  right: 0px !important;
+}
+.ant-btn-primary {
+  background-color: #5aab50 !important;
+  border-color: #5aab50 !important;
+}
+.p-6 {
+  padding: 0 !important;
+}
+.btn-back {
+  background-color: transparent;
+  border: 1px solid #5aab50;
+  color: #5aab50;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.btn-back:hover {
+  background-color: #5aab50;
+  border: 1px solid #5aab50 !important;
+  color: #5aab50 !important;
 }

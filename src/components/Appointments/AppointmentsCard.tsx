@@ -1,234 +1,186 @@
 // src/pages/patient/Appointments.tsx
 
-import  { useState } from "react";
-import {
-  Modal,
-  Form,
-  Input,
-  DatePicker,
-  TimePicker,
-  notification,
-  Row,
-  Col,
-  Card,
-  Typography,
-} from "antd";
+import { Row, Col, Card, Typography } from "antd";
 import DrSmithImg from "../../assets/driamge.jpg";
 import "./styles.scss";
 import { PrimaryButton } from "../PrimaryButton";
+import { useGetDoctorsQuery } from "../../features/api/doctor/doctorApi";
+import { decryptBase64, SECRET_KEY } from "../helper/Crypto";
+import LoadingSpinner from "../LoadingSpinner";
+import { useState } from "react";
+import WizardContainer from "../WizardContainer";
+import ClientReviews from "../Landing/Reviews";
 
 const { Title, Paragraph } = Typography;
 
 const AppointmentsCard = () => {
-  const [appointments, setAppointments] = useState([
-    { id: 1, doctor: "Dr. Smith", date: "2025-05-10", time: "10:00 AM" },
-    { id: 2, doctor: "Dr. Johnson", date: "2025-05-15", time: "02:30 PM" },
-  ]);
+  const [showWizard, setShowWizard] = useState(false);
+  const { data: doctors, isLoading } = useGetDoctorsQuery();
+  const doctorsData = Array.isArray(doctors?.data) ? doctors.data : [];
 
-  const [isModalVisible, setIsModalVisible] = useState(false);
-  const [form] = Form.useForm();
-
-  const showModal = () => {
-    setIsModalVisible(true);
-  };
-
-  const handleOk = () => {
-    form
-      .validateFields()
-      .then((values) => {
-        const formattedDate = values.date.format("YYYY-MM-DD");
-        const formattedTime = values.time.format("hh:mm A");
-
-        setAppointments([
-          ...appointments,
-          {
-            id: appointments.length + 1,
-            doctor: values.doctor,
-            date: formattedDate,
-            time: formattedTime,
-          },
-        ]);
-
-        notification.success({
-          message: "Appointment Scheduled",
-          description: `You have scheduled an appointment with ${values.doctor} on ${formattedDate} at ${formattedTime}.`,
-        });
-
-        form.resetFields();
-        setIsModalVisible(false);
-      })
-      .catch((info) => {
-        console.log("Validation Failed:", info);
-      });
-  };
-
-  const handleCancel = () => {
-    setIsModalVisible(false);
-  };
-
-  const doctors = [
-    {
-      id: 1,
-      name: "Dr. Smith",
-      experience: "16 Years Experience Overall",
-      image: DrSmithImg,
-      description: "Work and Student Sickness Certificate",
-      price: "€45.99",
-    },
-    {
-      id: 2,
-      name: "Dr. Johnson",
-      experience: "16 Years Experience Overall",
-      image: DrSmithImg,
-      description: "Work and Student Sickness Certificate",
-      price: "€45.99",
-    },
-    {
-      id: 3,
-      name: "Dr. Lee",
-      experience: "16 Years Experience Overall",
-      image: DrSmithImg,
-      description: "Work and Student Sickness Certificate",
-      price: "€45.99",
-    },
-  ];
+  const [showAllDoctors, setShowAllDoctors] = useState(false);
+  const doctorsToShow = showAllDoctors ? doctorsData : doctorsData.slice(0, 8);
 
   return (
     <div>
-    <div className="wrapper">
-      <div className="main">             <Title className="titel" level={3}>
-        Doctor Letters & Sick Notes
-      </Title>
-      <Paragraph className="titel">
-        Same-day letters, sick notes, medical certificates and referral letters.
-      </Paragraph>
-      <div style={{ marginTop: 40, marginBottom: 40 }}>
-        <Title className="titel" level={4}>
-          Terms & Conditions – Certificates Consultation
-        </Title>
-        <Paragraph>
-          <strong>Doctor’s Discretion:</strong> All certificates are issued at
-          the discretion of the doctor after a consultation with the patient.
-          The doctor will assess the request and determine whether it is
-          appropriate and safe to issue the certificate. If the doctor deems it
-          suitable, the certificate will be provided. However, if the doctor
-          decides not to issue a certificate, the patient will be informed
-          accordingly.
-        </Paragraph>
-        <Paragraph>
-          <strong>No Refund Policy:</strong> If a certificate is not issued
-          following the consultation, no refund will be processed. The service
-          provided is the consultation itself, and refunds do not apply as the
-          appointment slot was reserved for the patient’s request.
-        </Paragraph>
-        <Paragraph>
-          <strong>Pre-Consultation Confirmation:</strong> It is the patient’s
-          responsibility to confirm with our support team before booking a
-          consultation if they have any doubts about whether the requested
-          certificate can be issued. Once a consultation is booked, refunds will
-          not be processed based on the outcome.
-        </Paragraph>
-        <Paragraph>
-          <strong>Independent Medical Judgment:</strong> Our doctors work
-          independently while adhering to the platform’s policies, ensuring that
-          patient safety remains the top priority. Decisions regarding
-          certification are made solely based on professional medical judgment.
-        </Paragraph>
-        <Paragraph>
-          <strong>Requirement for Face-to-Face Consultation:</strong> In certain
-          cases, where our doctors determine that a face-to-face consultation is
-          necessary for patient safety, appropriate instructions will be
-          provided to the patient.
-        </Paragraph>
-        <Paragraph>
-          By booking a consultation, you acknowledge and agree to these terms
-          and conditions.
-        </Paragraph>
-      </div>
-      </div>
-      </div>
-<div className="card-container">
-<Row gutter={[16, 16]} justify="center">
-        {doctors.map((doctor) => (
-        <Col xs={24} sm={12} md={6}key={doctor.id}>
-            <Card
-              hoverable
-              cover={
-                <img
-                  alt={doctor.name}
-                  src={doctor.image}
-                  className="doctor-image"
-                  style={{ height: "200px", objectFit: "cover", width: "100%" }}
-                />
-              }
-              actions={[
-                <PrimaryButton
-                  htmlType="submit"
-                  onClick={showModal}
-                  style={{ width: "150px" }}
-                >
-                  Book Appointment
-                </PrimaryButton>,
-              ]}
-            >
-              <Card.Meta
-                style={{ textAlign: "center" }}
-                title={doctor.description}
-                description={doctor.price}
-              />
-              <Paragraph style={{ textAlign: "center", marginTop: 8 }}>
-                {doctor.experience}
+      <div>
+        {isLoading ? (
+          <div className="flex justify-center items-center h-screen">
+            <LoadingSpinner />
+          </div>
+        ) : (
+          <div className="wrapper">
+            <div className="main">
+              <div
+                data-aos="fade-right"
+                className="text-5xl flex gap-2 font-extrabold py-10 justify-center"
+              >
+                <span className="text-[#5bac52]"> Doctor Letters &</span> Sick
+                Notes
+              </div>
+              <Paragraph className="titel">
+                Same-day letters, sick notes, medical certificates and referral
+                letters.
               </Paragraph>
-            </Card>
-          </Col>
-        ))}
-      </Row>
-      <Modal
-        className="titel"
-        title="Schedule Appointment"
-        visible={isModalVisible}
-        onOk={handleOk}
-        onCancel={handleCancel}
-      >
-        <Form form={form} layout="vertical" name="appointmentForm">
-          <Form.Item
-            name="doctor"
-            label="Doctor"
-            rules={[
-              { required: true, message: "Please input the doctor's name!" },
-            ]}
-          >
-            <Input />
-          </Form.Item>
+              <div>
+                <Title className="titel !text-[#5bac52]" level={4}>
+                  Terms & Conditions – Certificates Consultation
+                </Title>
+                <div className="space-y-4 max-w-3xl mx-auto">
+                  <p>
+                    <strong>Doctor’s Discretion:</strong> All certificates are
+                    issued at the discretion of the doctor after a consultation.
+                  </p>
+                  <p>
+                    <strong>No Refund Policy:</strong> If a certificate is not
+                    issued following the consultation, no refund will be
+                    processed.
+                  </p>
+                  <p>
+                    <strong>Pre-Consultation Confirmation:</strong> It is the
+                    patient’s responsibility to confirm with our support team
+                    before booking.
+                  </p>
+                  <p>
+                    <strong>Independent Medical Judgment:</strong> Our doctors
+                    work independently while adhering to the platform’s
+                    policies.
+                  </p>
+                  <p>
+                    <strong>Requirement for Face-to-Face Consultation:</strong>{" "}
+                    In certain cases, where our doctors determine it’s
+                    necessary.
+                  </p>
+                  <p>
+                    By booking a consultation, you acknowledge and agree to
+                    these terms and conditions.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
 
-          <Form.Item
-            name="date"
-            label="Date"
-            rules={[
-              {
-                required: true,
-                message: "Please select the appointment date!",
-              },
-            ]}
-          >
-            <DatePicker style={{ width: "100%" }} />
-          </Form.Item>
+        <div
+          data-aos="fade-right"
+          className="text-5xl flex gap-2 font-extrabold py-20 justify-center"
+        >
+          <span className="text-[#5bac52]">Online Doctor </span> Consultation
+        </div>
 
-          <Form.Item
-            name="time"
-            label="Time"
-            rules={[
-              {
-                required: true,
-                message: "Please select the appointment time!",
-              },
-            ]}
+        <div className="card-container">
+          {doctorsData.length > 8 && (
+            <div className="flex justify-end mb-6">
+              <PrimaryButton onClick={() => setShowAllDoctors(!showAllDoctors)}>
+                {showAllDoctors ? "Show Less" : "View All"}
+              </PrimaryButton>
+            </div>
+          )}
+          <Row gutter={[16, 16]} justify="center">
+            {doctorsToShow.map((doctor) => {
+              let decryptedImage: string | null = null;
+              if (doctor.profile_image) {
+                decryptedImage = decryptBase64(
+                  doctor.profile_image.data,
+                  doctor.profile_image.iv,
+                  SECRET_KEY
+                );
+              }
+
+              return (
+                <Col xs={24} sm={12} md={6} key={doctor.id}>
+                  <Card
+                    hoverable
+                    cover={
+                      <img
+                        src={
+                          decryptedImage?.startsWith("data:image/")
+                            ? decryptedImage
+                            : DrSmithImg
+                        }
+                        alt={`${doctor.first_name} ${doctor.last_name}`}
+                        style={{
+                          marginBottom: 8,
+                          height: 200,
+                          objectFit: "cover",
+                          width: "100%",
+                        }}
+                      />
+                    }
+                    actions={[
+                      <PrimaryButton
+                        onClick={() => setShowWizard(true)}
+                        htmlType="button"
+                        style={{ width: "150px" }}
+                        key="book"
+                      >
+                        Book an Appointment
+                      </PrimaryButton>,
+                    ]}
+                  >
+                    <Card.Meta
+                      style={{ textAlign: "center" }}
+                      title={
+                        doctor.first_name || doctor.last_name
+                          ? `${doctor.first_name ?? ""} ${
+                              doctor.last_name ?? ""
+                            }`.trim()
+                          : "Doctor"
+                      }
+                      description={doctor?.doctor?.specialization || "N/A"}
+                    />
+                    <Paragraph style={{ textAlign: "center", marginTop: 8 }}>
+                      {doctor.experience}
+                    </Paragraph>
+                  </Card>
+                </Col>
+              );
+            })}
+          </Row>
+        </div>
+
+        <ClientReviews />
+      </div>
+
+      {showWizard && (
+        <div
+          className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50"
+          onClick={() => setShowWizard(false)}
+        >
+          <div
+            className="bg-white rounded-lg shadow-lg p-6 w-full max-w-3xl relative max-h-[90vh] overflow-y-auto"
+            onClick={(e) => e.stopPropagation()}
           >
-            <TimePicker style={{ width: "100%" }} format="HH:mm" />
-          </Form.Item>
-        </Form>
-      </Modal>
-    </div>
+            <button
+              className="absolute top-2 right-2 text-gray-500 hover:text-gray-700 text-2xl mr-2"
+              onClick={() => setShowWizard(false)}
+            >
+              &times;
+            </button>
+            <WizardContainer />
+          </div>
+        </div>
+      )}
     </div>
   );
 };

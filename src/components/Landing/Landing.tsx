@@ -1,66 +1,98 @@
-// import { ClockCircleOutlined } from "@ant-design/icons";
-import { COLORS } from "../../constants/theme";
-import { Link } from "react-router-dom";
-import {  shareLink } from "../../constants/constant";
+// import { COLORS } from "../../constants/theme";
+import { shareLink } from "../../constants/constant";
+import WizardContainer from "../WizardContainer";
+import { useState } from "react";
+import landingDoctor from "../../assets/GP-Consultation.webp";
 
 const Landing = () => {
-  // const pdfUrl = "https://accellionx.com/portfolio.pdf";
+  const [showWizard, setShowWizard] = useState(false);
+
   return (
-    <div
-      className="pt-[120px] h-screen flex justify-center items-center bg-cover bg-no-repeat bg-center w-full relative overflow-hidden"
-      style={{
-        background: COLORS.gradientPrimary,
-        // backgroundImage:
-        //   "url('https://res.cloudinary.com/dfizbmrep/image/upload/v1710497209/background_vgycqk.png')",
-      }}
-    >
-      <div className="innerContainer z-10">
-        <div className="flex max-lg:flex-col gap-5 items-center max-lg:pt-5">
-          <div className="flex flex-col gap-8 pl-8">
-            <div className="flex items-center flex-col">
+    <div>
+      {/* Hero Section */}
+      <section
+        className="pt-[120px] bg-[#e8f1fa] min-h-screen flex justify-center items-center bg-cover bg-no-repeat bg-center w-full relative overflow-hidden"
+        // style={{
+        //   background: COLORS.gradientPrimary,
+        // }}
+      >
+        <div className="innerContainer z-10 w-full px-4 max-w-7xl mx-auto">
+          <div className="flex max-lg:flex-col-reverse gap-12 items-center">
+            {/* Left Content */}
+            <div className="flex flex-col gap-6 text-[#5bac52] w-full lg:w-1/2">
               <h1
                 data-aos="fade-right"
-                className="text-[40px] font-extrabold leading-[70px] max-sm:text-5xl max-lg:text-4xl"
+                className="text-4xl text-gray-700 sm:text-5xl font-extrabold leading-tight text-left lg:text-left"
               >
-                       <div data-aos="fade-right" className="text-5xl flex gap-2 font-extrabold py-20 justify-center">
-                    <span className='text-white'>Extraordinary Care </span>  is Right Here
-                </div>
+                Schedule a Phone or Video Consultation
               </h1>
-              <div
-                data-aos="fade-right"
-                className="border-[5px] w-[45%] ml-28 mt-2 border-secondary"
-              ></div>
+
+              <div className="mt-4 lg:text-left">
+                <h2 className="text-2xl sm:text-3xl font-semibold">
+                  Online Consultation With an
+                </h2>
+                <p className="border-b-4 font-bold text-2xl sm:text-3xl border-[#5bac52] inline-block mt-2 pb-2">
+                  Irish-Registered Doctor
+                </p>
+              </div>
+
+              <p className="text-lg sm:text-xl text-gray-600  lg:text-left">
+                Find one of our highly experienced doctors today.
+              </p>
+
+              <div className="flex">
+                <button
+                  onClick={() => setShowWizard(true)}
+                  className="flex items-center text-lg font-semibold rounded-full px-6 py-3 bg-[#5aa778] hover:bg-[#4e9668] text-white shadow-md transition duration-300"
+                >
+                  <img src={shareLink} alt="Link" className="w-5 h-5 mr-2" />
+                  Get Appointment
+                </button>
+              </div>
             </div>
-            <p
-              data-aos="fade-right"
-              className="text-2xl text-textcolor max-sm:text-2xl max-lg:text-xl"
+
+            {/* Right Image */}
+            <div
+              data-aos="fade-left"
+              className="w-full lg:w-1/2 flex justify-center"
             >
-              FIND ONE OF OUR DOCTORS{" "}
-            </p>
-            <Link to="https://www.sidepanda.com" target="_blank">
-              <button className="flex items-center text-xl rounded-full px-6 py-4 w-max gap-2 text-white border-2 border-white hover:bg-[#5aa778] hover:shadow-lg transition duration-300 ease-in-out">
-                <img src={shareLink} alt="Link" className="link-icon w-6 h-6" />
-                <span className="ml-2">Get Appointment</span>
-              </button>
-            </Link>
-          </div>
-          <div data-aos="fade-left" className="max-sm:hidden ">
-            <img
-              src="https://res.cloudinary.com/dfizbmrep/image/upload/v1710497221/Mask_Group_c2hcwf.png"
-              alt="landing Image"
-              width={779}
-              height={740}
-            />
+              <img
+                src={landingDoctor}
+                alt="Doctor Consultation"
+                className="max-w-full h-auto rounded-lg"
+              />
+            </div>
           </div>
         </div>
-      </div>
-      <img
-        src="https://res.cloudinary.com/dfizbmrep/image/upload/v1710497210/bigstrings_ewtvre.png"
-        alt="icon"
-        width={1908}
-        height={1025}
-        className="absolute -bottom-[1000px] right-0 z-0"
-      />
+
+        {/* Decorative Background Image */}
+        <img
+          src="https://res.cloudinary.com/dfizbmrep/image/upload/v1710497210/bigstrings_ewtvre.png"
+          alt="background icon"
+          className="absolute -bottom-[900px] right-0 z-0 pointer-events-none opacity-30"
+        />
+      </section>
+
+      {/* Wizard Modal */}
+      {showWizard && (
+        <div
+          className="fixed inset-0 bg-opacity-60 flex items-center justify-center z-50"
+          onClick={() => setShowWizard(false)}
+        >
+          <div
+            className="bg-white rounded-lg shadow-2xl p-6 w-full max-w-3xl relative max-h-[90vh] overflow-y-auto"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <button
+              className="absolute top-3 right-4 text-gray-500 hover:text-gray-800 text-2xl"
+              onClick={() => setShowWizard(false)}
+            >
+              &times;
+            </button>
+            <WizardContainer />
+          </div>
+        </div>
+      )}
     </div>
   );
 };

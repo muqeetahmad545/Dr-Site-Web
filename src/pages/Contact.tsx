@@ -1,11 +1,13 @@
-import ContactHeader from '../components/Contact/ContactHeader'
+import ContactHeader from "../components/Contact/ContactHeader";
+import LandingContact from "../components/Contact/LandingContact";
 
 const Contact = () => {
   return (
     <div>
-        <ContactHeader/>
+      <LandingContact />
+      <ContactHeader />
     </div>
-  )
-}
+  );
+};
 
-export default Contact
+export default Contact;

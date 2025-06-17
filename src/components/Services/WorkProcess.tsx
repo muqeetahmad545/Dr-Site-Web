@@ -1,5 +1,3 @@
-
-
 const WorkProcess = () => {
   return (
     // <div className="flex justify-center bg-cover bg-no-repeat bg-center w-full relative">
@@ -30,12 +28,15 @@ const WorkProcess = () => {
     //     </div>
     // </div>
     <div>
-      <div className="flex justify-center bg-cover bg-no-repeat bg-center w-full relative">
-        <div data-aos="fade-right" className="flex gap-8">
+      <div className="flex justify-center bg-cover bg-no-repeat bg-center w-full relative mb-16">
+        <div data-aos="fade-right" className="flex gap-8 ">
           <div className="">
-            <h2 className="text-[32px] font-bold mb-4">
-              Chosen For Excellence
-            </h2>
+            <div
+              data-aos="fade-right"
+              className="text-5xl flex gap-2 font-extrabold py-20 justify-center"
+            >
+              <span className="!text-[#5bac52]">Chosen For</span> Excellence
+            </div>
             <div className="flex max-lg: max-sm:flex-col gap-5">
               <div>
                 <div className="flex flex-col gap-7">
@@ -45,9 +46,9 @@ const WorkProcess = () => {
                   <p>- Exerci tation ulm hedi corper</p>
                   <p>- Turet suscipit lobortis littera</p>
                 </div>
-                <span className="text-[#4AA7AD] ml-10 mt-3 cursor-pointer">
+                {/* <span className="text-[#4AA7AD] ml-10 mt-3 cursor-pointer">
                   Learn more -- &gt;
-                </span>
+                </span> */}
               </div>
               <div>
                 <img
