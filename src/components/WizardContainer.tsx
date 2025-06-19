@@ -9,6 +9,7 @@ import Step3_Payment from "./Wizard/Step3_Payment";
 import { loadStripe } from "@stripe/stripe-js";
 import { Elements } from "@stripe/react-stripe-js";
 import { message } from "antd";
+import { PrimaryButton } from "./PrimaryButton";
 
 const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY);
 
@@ -81,38 +82,40 @@ const WizardContainer = () => {
     <Elements stripe={stripePromise}>
       {isFinished ? (
         <div className="p-6 text-center">
-          <h2 className="mt-12 text-3xl font-bold mb-4 text-green-600">
+          <h2 className="mt-12 text-3xl font-bold mb-4 text-[#5aab50]">
             Appointment booked successfully!
           </h2>
           <p>Thank you for your appointment.</p>
-          <button
-            className="mt-6 mb-12 px-4 py-2 bg-green-600 text-white rounded"
-            onClick={() => {
-              // Reset wizard or close modal
-              setIsFinished(false);
-              setStep(1);
-              setSelectedDate("");
-              setSelectedTime("");
-              setFormData({
-                first_name: "",
-                last_name: "",
-                email: "",
-                phone: "",
-                gender: "",
-                address: "",
-                dob: "",
-                pharmacy: "",
-                symptoms: "",
-                appointment: {
-                  appointment_date: "",
-                  appointment_time: "",
-                },
-              });
-              setClientSecret(null);
-            }}
-          >
-            Book another appointment
-          </button>
+          <div className="mt-6 mb-12">
+            <PrimaryButton
+              // className="mt-6 mb-12 px-4 py-2 bg-green-600 text-white rounded"
+              onClick={() => {
+                // Reset wizard or close modal
+                setIsFinished(false);
+                setStep(1);
+                setSelectedDate("");
+                setSelectedTime("");
+                setFormData({
+                  first_name: "",
+                  last_name: "",
+                  email: "",
+                  phone: "",
+                  gender: "",
+                  address: "",
+                  dob: "",
+                  pharmacy: "",
+                  symptoms: "",
+                  appointment: {
+                    appointment_date: "",
+                    appointment_time: "",
+                  },
+                });
+                setClientSecret(null);
+              }}
+            >
+              Book another appointment
+            </PrimaryButton>
+          </div>
         </div>
       ) : (
         <div className="flex" style={{ height: "650px" }}>

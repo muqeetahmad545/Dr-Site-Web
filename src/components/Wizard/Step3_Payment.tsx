@@ -2,6 +2,8 @@ import { Button, message } from "antd";
 import { useState } from "react";
 import { CardElement, useStripe, useElements } from "@stripe/react-stripe-js";
 import type { PaymentIntent } from "@stripe/stripe-js";
+import { CheckCircleTwoTone } from "@ant-design/icons";
+import { PrimaryButton } from "../PrimaryButton";
 
 type Props = {
   clientSecret: string | null;
@@ -24,7 +26,7 @@ const CARD_ELEMENT_OPTIONS = {
 const Step3_Payment = ({ clientSecret, onSubmit, onBack }: Props) => {
   const [loading, setLoading] = useState(false);
   const [paymentCompleted, setPaymentCompleted] = useState(false);
-  const [paymentIntent, setPaymentIntent] = useState<PaymentIntent | null>(
+  const [_paymentIntent, setPaymentIntent] = useState<PaymentIntent | null>(
     null
   );
 
@@ -60,29 +62,25 @@ const Step3_Payment = ({ clientSecret, onSubmit, onBack }: Props) => {
 
     setLoading(false);
 
+    const intent = result.paymentIntent;
+
     if (result.error) {
       message.error(result.error.message || "Payment failed.");
       return;
     }
 
-    const intent = result.paymentIntent;
-
     if (intent?.status === "succeeded") {
       setPaymentCompleted(true);
       setPaymentIntent(intent);
-      message.success(
-        "Payment successful! You can now submit your appointment."
-      );
+
+      // message.success("Payment successful!");
+
+      // Automatically submit after payment success
+      setTimeout(() => {
+        onSubmit(intent);
+      }, 1000);
     } else {
       message.error("Payment was not successful. Please try again.");
-    }
-  };
-
-  const handleSubmit = () => {
-    if (paymentIntent) {
-      onSubmit(paymentIntent);
-    } else {
-      message.error("Please complete the payment before submitting.");
     }
   };
 
@@ -109,31 +107,48 @@ const Step3_Payment = ({ clientSecret, onSubmit, onBack }: Props) => {
         <label htmlFor="card-element" className="font-medium mb-2 block">
           Card Details
         </label>
-        <CardElement options={CARD_ELEMENT_OPTIONS} />
-        <div className="flex justify-end mt-4">
-          <Button
-            type="primary"
-            onClick={handlePayNow}
-            loading={loading}
-            disabled={paymentCompleted}
-          >
-            Pay Now
-          </Button>
-        </div>
+
+        {!paymentCompleted ? (
+          <>
+            <CardElement options={CARD_ELEMENT_OPTIONS} />
+            <div className="flex justify-end mt-4">
+              <PrimaryButton onClick={handlePayNow} loading={loading}>
+                Pay Now
+              </PrimaryButton>
+            </div>
+          </>
+        ) : (
+          <div className="text-center text-[#5aab50] font-bold text-3xl flex items-center justify-center gap-3 mt-6">
+            <CheckCircleTwoTone
+              twoToneColor="#52c41a"
+              style={{ fontSize: "64px" }}
+            />
+            Payment completed successfully!
+          </div>
+        )}
       </div>
 
       {/* Navigation */}
       <div className="flex justify-end gap-2 mt-4">
-        <Button onClick={onBack} disabled={loading}>
+        <Button
+          className=" px-8 py-2"
+          onClick={onBack}
+          disabled={loading || paymentCompleted}
+        >
           Back
         </Button>
-        <Button
-          type="primary"
-          disabled={!paymentCompleted}
-          onClick={handleSubmit}
-        >
-          Submit
-        </Button>
+        {/* Submit button hidden if auto-submitting */}
+        {/* {!paymentCompleted && (
+          <Button
+            type="primary"
+            onClick={() => {
+              if (paymentIntent) onSubmit(paymentIntent);
+            }}
+            disabled={!paymentIntent}
+          >
+            Submit
+          </Button>
+        )} */}
       </div>
     </div>
   );

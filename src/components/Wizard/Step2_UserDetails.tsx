@@ -15,6 +15,7 @@ import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/style.css";
 import { useValidatePatientMutation } from "../../features/api/patient/patientApi";
 import { usePaymentIntentMutation } from "../../features/api/payment/paymentApi";
+import { PrimaryButton } from "../PrimaryButton";
 
 interface Step2Props {
   formData: Appointment;
@@ -53,23 +54,26 @@ const Step2_UserDetails: React.FC<Step2Props> = ({
       if (isDayjs(values.dob)) {
         values.dob = values.dob.format("YYYY-MM-DD");
       }
-      const response = await validatePatient(values).unwrap();
 
-      if (response.message) {
+      const response = await validatePatient(values).unwrap();
+      const res = response as any;
+
+      if (res.message) {
         setFormData(values);
         onNext();
-        const response = await paymentIntent().unwrap();
-        const clientSecret = response?.data?.clientSecret;
-        console.log("clientSecret", clientSecret);
-        if (clientSecret) {
-          setClientSecret(clientSecret);
-        }
+        message.info(res.message).then(async () => {
+          const paymentRes = await paymentIntent().unwrap();
+          const clientSecret = paymentRes?.data?.clientSecret;
+
+          if (clientSecret) {
+            setClientSecret(clientSecret);
+          }
+        });
       } else {
-        message.info(response.message || "Validation info");
+        message.info(res?.message || "Validation info");
       }
     } catch (error: any) {
-      const errorMessage = error?.data?.message;
-      message.error(errorMessage);
+      message.error(error?.data?.message || "Something went wrong.");
     }
   };
 
@@ -214,9 +218,9 @@ const Step2_UserDetails: React.FC<Step2Props> = ({
           <Button className="btn-back" onClick={onBack}>
             Back
           </Button>
-          <Button type="primary" htmlType="submit" loading={isLoading}>
+          <PrimaryButton htmlType="submit" loading={isLoading}>
             Next
-          </Button>
+          </PrimaryButton>
         </div>
       </Form.Item>
     </Form>
