@@ -68,7 +68,7 @@ const Step1_DateTime = ({
 
   return (
     <div>
-      <h2 className="text-xl text-center text-[#5aab50] font-bold mb-4">
+      <h2 className="text-2xl text-center text-[#5aab50] font-bold mb-4">
         Select a Date & Time
       </h2>
 
@@ -76,7 +76,7 @@ const Step1_DateTime = ({
       <div className="grid grid-cols-7 gap-1 border p-2 rounded max-w-xxl mb-6 select-none">
         {/* Days of week */}
         {["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"].map((day) => (
-          <div key={day} className="font-bold text-center">
+          <div key={day} className="font-bold text-[#5aab50] text-center">
             {day}
           </div>
         ))}
@@ -115,7 +115,7 @@ const Step1_DateTime = ({
       {/* Time slots */}
       {selectedDate ? (
         <>
-          <h3 className="mb-2 font-semibold">Select Time</h3>
+          <h3 className="mb-2 font-bold text-[#5aab50] text-lg">Select Time</h3>
           <div className="grid grid-cols-4 sm:grid-cols-6 md:grid-cols-6 gap-2 max overflow-y-auto border p-2 rounded">
             {timeSlots.map((time) => (
               <button

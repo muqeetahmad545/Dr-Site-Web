@@ -14,12 +14,14 @@ interface SidebarProps {
   selectedTime: string;
   step: number;
   formData: Appointment;
+  setStep: (step: number) => void;
 }
 
 const Sidebar: React.FC<SidebarProps> = ({
   selectedDate,
   selectedTime,
   step,
+  setStep,
 }) => {
   const [collapsed, setCollapsed] = useState(false);
 
@@ -65,20 +67,22 @@ const Sidebar: React.FC<SidebarProps> = ({
         {/* Step List */}
         <ul>
           {Object.entries(stepTitles).map(([key, { label, icon }]) => {
-            const isActive = Number(key) === step;
+            const stepNumber = Number(key);
+            const isActive = stepNumber === step;
             return (
               <li
                 key={key}
-                className={`flex items-center mb-2 p-2 rounded transition-colors duration-200 ${
+                className={`flex items-center mb-2 p-2 rounded cursor-pointer transition-colors duration-200 ${
                   isActive
                     ? "bg-[#7bb6a9] text-white"
-                    : "bg-white text-[#5aa967]"
+                    : "bg-white text-[#5aa967] hover:bg-[#e0f4ef]"
                 }`}
+                onClick={() => setStep(stepNumber)}
               >
                 <div className="flex items-center justify-center w-6">
                   {icon}
                 </div>
-                {!collapsed && <span className="ml-2">{label}</span>}
+                {!collapsed && <span className="ml-2 font-bold">{label}</span>}
               </li>
             );
           })}
@@ -96,7 +100,7 @@ const Sidebar: React.FC<SidebarProps> = ({
               href="mailto:support@doxonline.ie"
               className="underline text-white"
             >
-              support@doxonline.ie
+              support@clinvia.com
             </a>
             <hr className="my-2 border-white border-t-2" />
           </div>

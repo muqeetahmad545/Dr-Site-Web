@@ -3,6 +3,7 @@ import { configureStore } from "@reduxjs/toolkit";
 import { apiSlice } from "./apiSlice";
 import { doctorApi } from "../features/api/doctor/doctorApi";
 import { appointmentApi } from "../features/api/appointment/appointmentApi";
+import { patientApi } from "../features/api/patient/patientApi";
 // import authReducer from "./authSlice";
 
 export const store = configureStore({
@@ -11,10 +12,12 @@ export const store = configureStore({
     [apiSlice.reducerPath]: apiSlice.reducer,
     [doctorApi.reducerPath]: doctorApi.reducer,
     [appointmentApi.reducerPath]: appointmentApi.reducer,
+    [patientApi.reducerPath]: patientApi.reducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware()
       .concat(apiSlice.middleware)
       .concat(appointmentApi.middleware)
-      .concat(doctorApi.middleware),
+      .concat(doctorApi.middleware)
+      .concat(patientApi.middleware),
 });

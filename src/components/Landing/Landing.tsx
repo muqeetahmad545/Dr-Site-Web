@@ -16,7 +16,7 @@ const Landing = () => {
         //   background: COLORS.gradientPrimary,
         // }}
       >
-        <div className="innerContainer z-10 w-full px-4 max-w-7xl mx-auto">
+        <div className="innerContainer z-10 w-full px-4 max-w-7xl mx-auto mb-20">
           <div className="flex max-lg:flex-col-reverse gap-12 items-center">
             {/* Left Content */}
             <div className="flex flex-col gap-6 text-[#5bac52] w-full lg:w-1/2">
@@ -45,7 +45,9 @@ const Landing = () => {
                   onClick={() => setShowWizard(true)}
                   className="flex items-center text-lg font-semibold rounded-full px-6 py-3 bg-[#5aa778] hover:bg-[#4e9668] text-white shadow-md transition duration-300"
                 >
-                  <img src={shareLink} alt="Link" className="w-5 h-5 mr-2" />
+                  <div className="!text-white">
+                    <img src={shareLink} alt="Link" className="w-5 h-5 mr-2" />
+                  </div>
                   Get Appointment
                 </button>
               </div>
@@ -80,7 +82,7 @@ const Landing = () => {
           onClick={() => setShowWizard(false)}
         >
           <div
-            className="bg-white rounded-lg shadow-2xl p-6 w-full max-w-3xl relative max-h-[90vh] overflow-y-auto"
+            className="bg-white rounded-lg shadow-2xl p-6 w-full max-w-4xl relative max-h-[90vh] overflow-y-auto"
             onClick={(e) => e.stopPropagation()}
           >
             <button

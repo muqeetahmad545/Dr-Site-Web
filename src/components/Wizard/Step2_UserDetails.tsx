@@ -1,15 +1,27 @@
-import { Form, Input, Row, Col, DatePicker, Radio, Button } from "antd";
-import React from "react";
+import {
+  Form,
+  Input,
+  Row,
+  Col,
+  DatePicker,
+  Radio,
+  Button,
+  message,
+} from "antd";
+import React, { useEffect } from "react";
 import type { Appointment } from "../../types/appointment";
-import dayjs from "dayjs";
+import dayjs, { isDayjs } from "dayjs";
 import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/style.css";
+import { useValidatePatientMutation } from "../../features/api/patient/patientApi";
+import { usePaymentIntentMutation } from "../../features/api/payment/paymentApi";
 
 interface Step2Props {
   formData: Appointment;
   setFormData: (data: Appointment) => void;
   onNext: () => void;
   onBack: () => void;
+  setClientSecret: (secret: string) => void;
 }
 
 const Step2_UserDetails: React.FC<Step2Props> = ({
@@ -17,12 +29,48 @@ const Step2_UserDetails: React.FC<Step2Props> = ({
   setFormData,
   onNext,
   onBack,
+  setClientSecret,
 }) => {
   const [form] = Form.useForm();
+  const [validatePatient, { isLoading }] = useValidatePatientMutation();
+  const [paymentIntent] = usePaymentIntentMutation();
 
-  const handleFinish = (values: Appointment) => {
-    setFormData(values);
-    onNext();
+  useEffect(() => {
+    form.setFieldsValue({
+      ...formData,
+      dob: formData.dob ? dayjs(formData.dob) : null,
+    });
+  }, [formData, form]);
+
+  const handleValuesChange = (_changedValues: any, allValues: any) => {
+    if (allValues.dob instanceof dayjs) {
+      allValues.dob = allValues.dob.format("YYYY-MM-DD");
+    }
+    setFormData(allValues);
+  };
+  const handleFinish = async (values: Appointment) => {
+    try {
+      if (isDayjs(values.dob)) {
+        values.dob = values.dob.format("YYYY-MM-DD");
+      }
+      const response = await validatePatient(values).unwrap();
+
+      if (response.message) {
+        setFormData(values);
+        onNext();
+        const response = await paymentIntent().unwrap();
+        const clientSecret = response?.data?.clientSecret;
+        console.log("clientSecret", clientSecret);
+        if (clientSecret) {
+          setClientSecret(clientSecret);
+        }
+      } else {
+        message.info(response.message || "Validation info");
+      }
+    } catch (error: any) {
+      const errorMessage = error?.data?.message;
+      message.error(errorMessage);
+    }
   };
 
   return (
@@ -31,9 +79,9 @@ const Step2_UserDetails: React.FC<Step2Props> = ({
       layout="vertical"
       size="middle"
       onFinish={handleFinish}
-      initialValues={formData}
+      onValuesChange={handleValuesChange}
     >
-      <h2 className="text-xl text-center text-[#5aab50] font-bold mb-4">
+      <h2 className="text-2xl text-center text-[#5aab50] font-bold mb-4">
         Enter Your Details
       </h2>
 
@@ -82,10 +130,11 @@ const Step2_UserDetails: React.FC<Step2Props> = ({
             ]}
           >
             <PhoneInput
-              country="pk"
+              country="ie"
               value={formData.phone}
               onChange={(phone) => {
-                setFormData({ ...formData, phone });
+                const newData = { ...formData, phone };
+                setFormData(newData);
                 form.setFieldsValue({ phone });
               }}
               inputStyle={{ width: "100%" }}
@@ -165,7 +214,7 @@ const Step2_UserDetails: React.FC<Step2Props> = ({
           <Button className="btn-back" onClick={onBack}>
             Back
           </Button>
-          <Button type="primary" htmlType="submit">
+          <Button type="primary" htmlType="submit" loading={isLoading}>
             Next
           </Button>
         </div>

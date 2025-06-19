@@ -1,3 +1,5 @@
+import type { PaymentIntent } from "@stripe/stripe-js";
+
 export interface Appointment {
   first_name: string;
   last_name: string;
@@ -8,9 +10,9 @@ export interface Appointment {
   dob: string;
   pharmacy: string;
   symptoms: string;
-  // payment_method?: string;
   appointment?: {
     appointment_date: string;
     appointment_time: string;
   };
+  paymentIntent?: PaymentIntent;
 }
