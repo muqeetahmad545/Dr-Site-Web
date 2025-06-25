@@ -25,7 +25,7 @@ const Step1_DateTime = ({
   const allowedDates = Array.from({ length: 5 }, (_, i) => {
     const d = new Date(today);
     d.setDate(today.getDate() + i);
-    return d.toISOString().split("T")[0];
+    return d.toLocaleDateString("en-CA");
   });
 
   const year = today.getFullYear();
@@ -63,7 +63,7 @@ const Step1_DateTime = ({
   // Format date string YYYY-MM-DD for comparison
   const formatDate = (day: number) => {
     const d = new Date(year, month, day);
-    return d.toISOString().split("T")[0];
+    return d.toLocaleDateString("en-CA");
   };
 
   return (
