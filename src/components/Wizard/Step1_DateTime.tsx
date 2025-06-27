@@ -66,6 +66,20 @@ const Step1_DateTime = ({
     return d.toLocaleDateString("en-CA");
   };
 
+  function isFutureTimeSlot(timeStr: string): boolean {
+    const now = new Date();
+    const [time, modifier] = timeStr.split(" ");
+    let [hours, minutes] = time.split(":").map(Number);
+
+    if (modifier === "PM" && hours !== 12) hours += 12;
+    if (modifier === "AM" && hours === 12) hours = 0;
+
+    const slotTime = new Date(now);
+    slotTime.setHours(hours, minutes, 0, 0);
+
+    return slotTime.getTime() > now.getTime();
+  }
+
   return (
     <div>
       <h2 className="text-2xl text-center text-[#5aab50] font-bold mb-4">
@@ -117,18 +131,24 @@ const Step1_DateTime = ({
         <>
           <h3 className="mb-2 font-bold text-[#5aab50] text-lg">Select Time</h3>
           <div className="grid grid-cols-4 sm:grid-cols-6 md:grid-cols-6 gap-2 max overflow-y-auto border p-2 rounded">
-            {timeSlots.map((time) => (
-              <button
-                key={time}
-                type="button"
-                className={`px-2 py-1 text-sm border rounded ${
-                  selectedTime === time ? "bg-[#5aab50] text-white" : ""
-                }`}
-                onClick={() => setSelectedTime(time)}
-              >
-                {time}
-              </button>
-            ))}
+            {timeSlots
+              .filter((time) => {
+                const isToday =
+                  selectedDate === today.toLocaleDateString("en-CA");
+                return isToday ? isFutureTimeSlot(time) : true;
+              })
+              .map((time) => (
+                <button
+                  key={time}
+                  type="button"
+                  className={`px-2 py-1 text-sm border rounded ${
+                    selectedTime === time ? "bg-[#5aab50] text-white" : ""
+                  }`}
+                  onClick={() => setSelectedTime(time)}
+                >
+                  {time}
+                </button>
+              ))}
           </div>
         </>
       ) : (

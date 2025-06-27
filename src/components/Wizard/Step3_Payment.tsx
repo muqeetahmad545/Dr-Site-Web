@@ -75,10 +75,11 @@ const Step3_Payment = ({ clientSecret, onSubmit, onBack }: Props) => {
 
       // message.success("Payment successful!");
 
-      // Automatically submit after payment success
-      setTimeout(() => {
-        onSubmit(intent);
-      }, 1000);
+      // setTimeout(() => {
+      //   onSubmit(intent);
+      // }, 100);
+
+      onSubmit(intent);
     } else {
       message.error("Payment was not successful. Please try again.");
     }

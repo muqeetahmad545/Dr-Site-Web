@@ -8,6 +8,7 @@ import Home from "./pages/Landing";
 import Appointments from "./pages/Appointments";
 import Contact from "./pages/Contact";
 import AppointmentTimeout from "./pages/timeout";
+import { NotFound } from "./pages/NotFound";
 // import { SignupPage } from "./pages/SignUp";
 // import { LoginPage } from "./pages/Login";
 const App = () => {
@@ -21,6 +22,7 @@ const App = () => {
         <Route path="/appointments" element={<Appointments />} />
         <Route path="/contact-us" element={<Contact />} />
         <Route path="/timeout" element={<AppointmentTimeout />} />
+        <Route path="*" element={<NotFound />} />
 
         {/* <Route path="/signup" element={<SignupPage />} />
         <Route path="/login" element={<LoginPage />} /> */}
