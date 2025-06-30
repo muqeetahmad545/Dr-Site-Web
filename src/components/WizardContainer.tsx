@@ -55,7 +55,7 @@ const WizardContainer = () => {
       const res = await bookAppointment(payload).unwrap();
 
       if (res.message?.includes("Successfully")) {
-        message.success(res.message);
+        // message.success(res.message);
         setIsFinished(true);
       } else {
         console.error("Booking failed:", res);

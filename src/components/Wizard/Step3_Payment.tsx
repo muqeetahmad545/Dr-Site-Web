@@ -21,6 +21,7 @@ const CARD_ELEMENT_OPTIONS = {
     },
     invalid: { color: "#fa755a" },
   },
+  hidePostalCode: true,
 };
 
 const Step3_Payment = ({ clientSecret, onSubmit, onBack }: Props) => {
