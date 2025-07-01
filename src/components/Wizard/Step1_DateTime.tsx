@@ -34,7 +34,20 @@ const Step1_DateTime = ({
   const daysInMonth = getDaysInMonth(year, month);
   const firstDayOfWeek = getDayOfWeek(year, month, 1); // for padding empty slots
 
-  // Generate time slots for the day (every 30 mins)
+  // Check if next month days are needed
+  const lastAllowedDate = new Date(today);
+  lastAllowedDate.setDate(today.getDate() + 4);
+  const nextMonthYear = lastAllowedDate.getFullYear();
+  const nextMonth = lastAllowedDate.getMonth();
+
+  let nextMonthDaysToShow = 0;
+  if (nextMonth !== month) {
+    nextMonthDaysToShow = allowedDates.filter((dateStr) => {
+      const d = new Date(dateStr);
+      return d.getMonth() === nextMonth;
+    }).length;
+  }
+
   const generateTimeSlots = (start: string, end: string, interval: number) => {
     const times: string[] = [];
     let [startH, startM] = start.split(":").map(Number);
@@ -60,8 +73,7 @@ const Step1_DateTime = ({
 
   const timeSlots = generateTimeSlots("07:00", "22:00", 30);
 
-  // Format date string YYYY-MM-DD for comparison
-  const formatDate = (day: number) => {
+  const formatDate = (year: number, month: number, day: number) => {
     const d = new Date(year, month, day);
     return d.toLocaleDateString("en-CA");
   };
@@ -100,10 +112,10 @@ const Step1_DateTime = ({
           <div key={"empty-" + i} />
         ))}
 
-        {/* Days in month */}
+        {/* Days in current month */}
         {Array.from({ length: daysInMonth }, (_, i) => {
           const day = i + 1;
-          const dateStr = formatDate(day);
+          const dateStr = formatDate(year, month, day);
           const isSelectable = allowedDates.includes(dateStr);
           const isSelected = selectedDate === dateStr;
 
@@ -124,6 +136,32 @@ const Step1_DateTime = ({
             </button>
           );
         })}
+
+        {/* Days in next month if needed */}
+        {nextMonthDaysToShow > 0 &&
+          Array.from({ length: nextMonthDaysToShow }, (_, i) => {
+            const day = i + 1;
+            const dateStr = formatDate(nextMonthYear, nextMonth, day);
+            const isSelectable = allowedDates.includes(dateStr);
+            const isSelected = selectedDate === dateStr;
+
+            return (
+              <button
+                key={dateStr}
+                disabled={!isSelectable}
+                onClick={() => setSelectedDate(dateStr)}
+                className={`p-2 text-center rounded ${
+                  isSelected
+                    ? "bg-[#5aab50] text-white"
+                    : isSelectable
+                    ? "hover:bg-[#5aab50]"
+                    : "text-gray-400 cursor-not-allowed"
+                }`}
+              >
+                {day}
+              </button>
+            );
+          })}
       </div>
 
       {/* Time slots */}
