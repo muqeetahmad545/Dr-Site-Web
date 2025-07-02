@@ -12,7 +12,7 @@ export const doctorApi = createApi({
   endpoints: (builder) => ({
     getDoctors: builder.query<GetDoctorsResponse, void>({
       query: () => ({
-        url: "/admin/doctors",
+        url: "/web/doctors",
         method: "GET",
       }),
     }),

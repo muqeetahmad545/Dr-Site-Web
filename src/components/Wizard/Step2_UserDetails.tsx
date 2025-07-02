@@ -135,6 +135,7 @@ const Step2_UserDetails: React.FC<Step2Props> = ({
           >
             <PhoneInput
               country="ie"
+              disableDropdown
               value={formData.phone}
               onChange={(phone) => {
                 const newData = { ...formData, phone };
